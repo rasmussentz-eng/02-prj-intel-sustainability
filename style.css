@@ -117,13 +117,34 @@ main {
   background: white;
   border-radius: 24px;
   overflow: hidden;
+  position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   will-change: transform;
   opacity: 0;
   transform: translateY(18px);
   animation: fadeInUp 0.7s ease forwards;
+}
+
+.timeline-card::after {
+  content: attr(data-detail);
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+  padding: 0 1.35rem;
+  margin: 0;
+  color: var(--muted-text);
+  line-height: 1.7;
+}
+
+.timeline-card:hover::after,
+.timeline-card:focus-visible::after {
+  opacity: 1;
+  max-height: 160px;
+  margin-top: 1rem;
 }
 
 .timeline-card:nth-child(1) {
@@ -163,10 +184,13 @@ main {
 }
 
 /* LevelUp 2: Hover uplift and soft Intel-blue shadow */
-.timeline-card:hover {
-  transform: translateY(-6px);
+.timeline-card:hover,
+.timeline-card:focus-visible {
+  transform: translateY(-6px) scale(1.02);
   box-shadow: 0 20px 45px rgba(0, 113, 197, 0.16);
   border-color: rgba(0, 113, 197, 0.22);
+  outline: 3px solid rgba(0, 113, 197, 0.18);
+  outline-offset: 4px;
 }
 
 .timeline-card figure {
